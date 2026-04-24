@@ -2,38 +2,63 @@
   "questions": [
     {
       "stage": "pre",
-      "question": "What does 'version control' primarily help you do?",
-      "options": ["Speed up code execution", "Track changes to files over time and collaborate with others", "Compress files to save disk space", "Automatically fix bugs in your code"],
+      "question": "'Kiểm soát phiên bản' chủ yếu giúp bạn làm gì?",
+      "options": [
+        "Tăng tốc độ thực thi mã",
+        "Theo dõi các thay đổi đối với tệp theo thời gian và cộng tác với những người khác",
+        "Nén tập tin để tiết kiệm dung lượng ổ đĩa",
+        "Tự động sửa lỗi trong mã của bạn"
+      ],
       "correct": 1,
-      "explanation": "Version control systems like git track every change made to files, allowing you to revert to previous states and collaborate with others on the same codebase."
+      "explanation": "Các hệ thống kiểm soát phiên bản như git theo dõi mọi thay đổi được thực hiện đối với tệp, cho phép bạn quay lại trạng thái trước đó và cộng tác với những người khác trên cùng một cơ sở mã."
     },
     {
       "stage": "pre",
-      "question": "What is a 'repository' in the context of software development?",
-      "options": ["A cloud storage service like Google Drive", "A collection of files and their complete change history managed by version control", "A database for storing user data", "A package manager for installing libraries"],
+      "question": "'Kho lưu trữ' là gì trong bối cảnh phát triển phần mềm?",
+      "options": [
+        "Dịch vụ lưu trữ đám mây như Google Drive",
+        "Một tập hợp các tệp và lịch sử thay đổi hoàn chỉnh của chúng được quản lý bởi kiểm soát phiên bản",
+        "Cơ sở dữ liệu để lưu trữ dữ liệu người dùng",
+        "Trình quản lý gói để cài đặt thư viện"
+      ],
       "correct": 1,
-      "explanation": "A repository (repo) is a directory tracked by git that contains all project files along with the full history of changes made to those files."
+      "explanation": "Kho lưu trữ (repo) là một thư mục được theo dõi bởi git chứa tất cả các tệp dự án cùng với toàn bộ lịch sử các thay đổi được thực hiện đối với các tệp đó."
     },
     {
       "stage": "post",
-      "question": "What is the correct sequence for saving and backing up your work in git?",
-      "options": ["git push, git add, git commit", "git commit, git add, git push", "git add, git commit, git push", "git clone, git add, git push"],
+      "question": "Trình tự chính xác để lưu và sao lưu công việc của bạn trong git là gì?",
+      "options": [
+        "git đẩy, git thêm, git cam kết",
+        "git cam kết, git thêm, git đẩy",
+        "git thêm, git cam kết, git đẩy",
+        "git clone, git thêm, git đẩy"
+      ],
       "correct": 2,
-      "explanation": "First you stage changes with 'git add', then save a snapshot with 'git commit', then upload to the remote with 'git push'. This is the daily workflow."
+      "explanation": "Trước tiên, bạn thực hiện các thay đổi bằng 'git add', sau đó lưu ảnh chụp nhanh bằng 'git commit', sau đó tải lên điều khiển từ xa bằng 'git push'. Đây là quy trình làm việc hàng ngày."
     },
     {
       "stage": "post",
-      "question": "What does 'git checkout -b experiment/new-optimizer' do?",
-      "options": ["Downloads a branch from GitHub called experiment/new-optimizer", "Creates a new branch named experiment/new-optimizer and switches to it", "Deletes the branch experiment/new-optimizer", "Reverts all files to match the experiment/new-optimizer branch"],
+      "question": "'Kiểm tra git -b thử nghiệm/trình tối ưu hóa mới' làm gì?",
+      "options": [
+        "Tải xuống một nhánh từ GitHub có tên là thử nghiệm/trình tối ưu hóa mới",
+        "Tạo một nhánh mới có tên là trial/new-optimizer và chuyển sang nhánh đó",
+        "Xóa thử nghiệm nhánh/trình tối ưu hóa mới",
+        "Hoàn nguyên tất cả các tệp để khớp với nhánh thử nghiệm/trình tối ưu hóa mới"
+      ],
       "correct": 1,
-      "explanation": "The '-b' flag creates a new branch with the given name and immediately switches to it, allowing you to experiment without affecting the main branch."
+      "explanation": "Cờ '-b' tạo một nhánh mới với tên đã cho và ngay lập tức chuyển sang nhánh đó, cho phép bạn thử nghiệm mà không ảnh hưởng đến nhánh chính."
     },
     {
       "stage": "post",
-      "question": "Why should you add '.pt', '.pth', and '.safetensors' to your .gitignore?",
-      "options": ["They are Python test files that should not be committed", "They are model checkpoint files that are too large for git and can be re-generated", "They contain sensitive API keys", "Git cannot track binary files of any kind"],
+      "question": "Tại sao bạn nên thêm '.pt', '.pth' và '.safetensors' vào .gitignore của mình?",
+      "options": [
+        "Chúng là các tệp thử nghiệm Python không nên được cam kết",
+        "Chúng là các tệp điểm kiểm tra mô hình quá lớn đối với git và có thể được tạo lại",
+        "Chúng chứa các khóa API nhạy cảm",
+        "Git không thể theo dõi bất kỳ loại tệp nhị phân nào"
+      ],
       "correct": 1,
-      "explanation": "Model checkpoint files (.pt, .pth, .safetensors) are often gigabytes in size. Git is not designed for large binary files, so these should be excluded and re-generated or stored separately."
+      "explanation": "Các tệp điểm kiểm tra mô hình (.pt, .pth, .safetensors) thường có kích thước hàng gigabyte. Git không được thiết kế cho các tệp nhị phân lớn, vì vậy những tệp này cần được loại trừ và tạo lại hoặc lưu trữ riêng."
     }
   ]
 }

@@ -2,38 +2,63 @@
   "questions": [
     {
       "stage": "pre",
-      "question": "Why is scheduling GPU workloads on Kubernetes different from scheduling CPU workloads?",
-      "options": ["Kubernetes does not support GPU workloads", "GPUs are not fungible: a pod requiring an A100 cannot run on an L4, and GPU hours cost 10-50x more than CPU hours, making idle resources extremely expensive", "GPU workloads do not need resource limits", "Kubernetes automatically detects and allocates GPUs without any configuration"],
+      "question": "Tại sao việc lập lịch khối lượng công việc GPU trên Kubernetes lại khác với việc lập lịch khối lượng công việc CPU?",
+      "options": [
+        "Kubernetes không hỗ trợ khối lượng công việc GPU",
+        "GPU không thể thay thế được: nhóm yêu cầu A100 không thể chạy trên L4 và số giờ sử dụng GPU đắt hơn 10-50 lần so với số giờ sử dụng CPU, khiến tài nguyên nhàn rỗi trở nên cực kỳ tốn kém",
+        "Khối lượng công việc GPU không cần giới hạn tài nguyên",
+        "Kubernetes tự động phát hiện và phân bổ GPU mà không cần bất kỳ cấu hình nào"
+      ],
       "correct": 1,
-      "explanation": "CPU cores are interchangeable, but GPU types are not. A model compiled for A100 may not fit on an L4's memory. The scheduler must match specific GPU types, and the cost of idle GPUs makes efficient scheduling critical."
+      "explanation": "Các lõi CPU có thể hoán đổi cho nhau, nhưng loại GPU thì không. Mô hình được biên dịch cho A100 có thể không vừa với bộ nhớ của L4. Bộ lập lịch phải phù hợp với các loại GPU cụ thể và chi phí của GPU nhàn rỗi khiến việc lập lịch hiệu quả trở nên quan trọng."
     },
     {
       "stage": "pre",
-      "question": "What is a 'cold start' in the context of model serving on Kubernetes?",
-      "options": ["Starting a Kubernetes cluster for the first time", "The delay when a new pod starts and must load a multi-gigabyte model into GPU memory before it can serve requests, often taking 3-5 minutes", "The time it takes to pull a Docker image from a registry", "Restarting a pod after a crash"],
+      "question": "'Khởi đầu nguội' trong bối cảnh phân phát mô hình trên Kubernetes là gì?",
+      "options": [
+        "Bắt đầu cụm Kubernetes lần đầu tiên",
+        "Độ trễ khi nhóm mới khởi động và phải tải mô hình nhiều gigabyte vào bộ nhớ GPU trước khi có thể phân phát yêu cầu, thường mất 3-5 phút",
+        "Thời gian cần thiết để kéo hình ảnh Docker từ sổ đăng ký",
+        "Khởi động lại nhóm sau sự cố"
+      ],
       "correct": 1,
-      "explanation": "Loading a 7B parameter model into GPU memory takes 3-5 minutes. During this time the pod is running but cannot serve requests. For autoscaling, this means new capacity is not available for minutes after a traffic spike begins."
+      "explanation": "Việc tải mô hình tham số 7B vào bộ nhớ GPU mất 3-5 phút. Trong thời gian này nhóm đang chạy nhưng không thể phục vụ yêu cầu. Đối với tính năng tự động điều chỉnh quy mô, điều này có nghĩa là dung lượng mới sẽ không có sẵn trong vài phút sau khi lưu lượng truy cập bắt đầu tăng đột biến."
     },
     {
       "stage": "post",
-      "question": "Why should you autoscale GPU model servers based on request queue depth instead of CPU utilization?",
-      "options": ["CPU utilization is not available in Kubernetes", "GPU inference keeps CPU utilization low even when the GPU is saturated; queue depth directly measures demand that exceeds current capacity", "CPU-based scaling is more expensive", "Queue depth is easier to configure in Kubernetes"],
+      "question": "Tại sao bạn nên tự động điều chỉnh quy mô máy chủ mô hình GPU dựa trên độ sâu hàng đợi yêu cầu thay vì mức sử dụng CPU?",
+      "options": [
+        "Việc sử dụng CPU không khả dụng trong Kubernetes",
+        "Suy luận GPU giúp mức sử dụng CPU ở mức thấp ngay cả khi GPU bão hòa; độ sâu hàng đợi đo trực tiếp nhu cầu vượt quá khả năng hiện tại",
+        "Việc mở rộng quy mô dựa trên CPU đắt hơn",
+        "Độ sâu hàng đợi dễ cấu hình hơn trong Kubernetes"
+      ],
       "correct": 1,
-      "explanation": "A model server can have 10% CPU utilization while the GPU is 100% busy and requests are queuing. CPU-based HPA would not scale up. Queue depth (pending requests) directly measures 'are users waiting?' and triggers scaling when they are."
+      "explanation": "Một máy chủ mô hình có thể sử dụng 10% CPU trong khi GPU bận 100% và các yêu cầu đang xếp hàng. HPA dựa trên CPU sẽ không mở rộng quy mô. Độ sâu hàng đợi (yêu cầu đang chờ xử lý) đo trực tiếp 'người dùng có đang chờ không?' và kích hoạt mở rộng quy mô khi có."
     },
     {
       "stage": "post",
-      "question": "What is a warm pool strategy for mitigating cold starts?",
-      "options": ["Running models on CPUs during low traffic periods", "Keeping pre-provisioned pods with models already loaded in GPU memory so they can immediately serve traffic when demand increases, instead of loading from scratch", "Caching model weights on the Kubernetes control plane", "Using smaller quantized models during scale-up events"],
+      "question": "Chiến lược nhóm ấm để giảm thiểu khởi đầu lạnh là gì?",
+      "options": [
+        "Chạy các mô hình trên CPU trong thời gian lưu lượng truy cập thấp",
+        "Giữ lại các nhóm được cung cấp trước với các mô hình đã được tải trong bộ nhớ GPU để chúng có thể phục vụ lưu lượng truy cập ngay lập tức khi nhu cầu tăng, thay vì tải từ đầu",
+        "Trọng lượng mô hình bộ nhớ đệm trên mặt phẳng điều khiển Kubernetes",
+        "Sử dụng các mô hình lượng tử hóa nhỏ hơn trong các sự kiện mở rộng quy mô"
+      ],
       "correct": 1,
-      "explanation": "A warm pool maintains idle pods with models pre-loaded in GPU memory. When traffic spikes, these pods are immediately available (0s cold start vs 3-5 minutes). The tradeoff is paying for idle GPU time."
+      "explanation": "Một nhóm ấm duy trì các nhóm không hoạt động với các mô hình được tải sẵn trong bộ nhớ GPU. Khi lưu lượng truy cập tăng đột biến, các nhóm này sẽ có sẵn ngay lập tức (khởi động nguội 0 giây so với 3-5 phút). Sự đánh đổi là phải trả giá cho thời gian GPU nhàn rỗi."
     },
     {
       "stage": "post",
-      "question": "What should a Kubernetes readiness probe check for a model serving pod?",
-      "options": ["Whether the pod's CPU utilization is below 50%", "Whether the model is fully loaded into GPU memory and the serving endpoint can successfully process an inference request", "Whether the Docker container has started", "Whether the pod has a network connection to the internet"],
+      "question": "Đầu dò mức độ sẵn sàng của Kubernetes nên kiểm tra điều gì đối với nhóm phân phát mô hình?",
+      "options": [
+        "Mức độ sử dụng CPU của nhóm có dưới 50% hay không",
+        "Liệu mô hình có được tải đầy đủ vào bộ nhớ GPU hay không và điểm cuối phân phát có thể xử lý thành công yêu cầu suy luận hay không",
+        "Bộ chứa Docker đã bắt đầu chưa",
+        "Liệu nhóm có kết nối mạng với internet hay không"
+      ],
       "correct": 1,
-      "explanation": "A model server pod can be running (liveness) but not ready to serve (the model is still loading). The readiness probe should hit the inference endpoint with a test request. Until it returns 200, Kubernetes will not route traffic to that pod."
+      "explanation": "Một nhóm máy chủ mô hình có thể đang chạy (hoạt động) nhưng chưa sẵn sàng phục vụ (mô hình vẫn đang tải). Đầu dò mức độ sẵn sàng sẽ đạt điểm cuối suy luận với yêu cầu kiểm tra. Cho đến khi trả về 200, Kubernetes sẽ không định tuyến lưu lượng truy cập đến nhóm đó."
     }
   ]
 }
